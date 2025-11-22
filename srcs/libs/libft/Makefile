@@ -6,7 +6,7 @@
 #    By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/30 14:20:33 by rnuno-im          #+#    #+#              #
-#    Updated: 2025/11/12 16:12:51 by rubenior         ###   ########.fr        #
+#    Updated: 2025/11/21 23:00:51 by rubenior         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,9 @@ SRCS 	= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 			ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 			ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 			ft_printf.c ft_printf_char.c ft_printf_hex.c ft_printf_nbr.c  \
-			ft_printf_ptr.c get_next_line.c get_next_line_utils.c 
+			ft_printf_ptr.c
 			
-OBJS	= $(SRCS:.c=.o)
+OBJS	= 	$(SRCS:.c=.o)
 
 AR		= ar rcs
 RM		= rm -rf

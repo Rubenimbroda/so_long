@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 12:18:47 by rnuno-im          #+#    #+#             */
-/*   Updated: 2025/09/30 19:04:59 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/22 00:14:34 by rubenior         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char str[])
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 		i++;
 	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:23 by rnuno-im          #+#    #+#             */
-/*   Updated: 2025/11/13 10:35:48 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/21 20:21:21 by rubenior         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
-
+    
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
@@ -64,11 +64,5 @@ int				ft_putnbr_u(unsigned int n);
 int				ft_puthex_low(unsigned long long n);
 int				ft_puthex_upper(unsigned long long n);
 int				ft_putptr(void *ptr);
-char			*get_next_line(int fd);
-char			*get_line(const char *line);
-char			*save_rest(char *line);
-size_t			ft_strlen(const char *str);
-char			*ft_strjoin_gnl(char *s1, const char *s2);
-char			*ft_strchr(const char *str, int c);
 
 #endif
