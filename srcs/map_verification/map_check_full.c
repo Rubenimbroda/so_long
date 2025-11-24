@@ -6,7 +6,7 @@
 /*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 00:43:17 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/22 00:58:21 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:18:21 by rubenior         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	get_size(int fd, t_all *data)
 	str = get_next_line(fd);
 	if (str == NULL)
 		return (0);
-	data->map.w = (int)ft_strlen(str);
+	data->map.w = ft_strlen(str);
 	while (str)
 	{
 		if (ft_strlen(str) != (size_t)data->map.w

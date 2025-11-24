@@ -6,7 +6,7 @@
 /*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 02:43:38 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/21 23:59:39 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/24 13:48:02 by rubenior         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int	check_characters(char *str)
 	{
 		if (str[i] != '1' && str[i] != '0' && str[i] != 'P'
 			&& str[i] != 'C' && str[i] != 'E' && str[i] != '\n')
+		{
 			return (1);
-
+		}
 		i++;
 	}
 	return (0);

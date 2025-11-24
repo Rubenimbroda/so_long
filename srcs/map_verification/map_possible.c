@@ -6,7 +6,7 @@
 /*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 02:27:15 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/21 22:56:20 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/24 13:50:53 by rubenior         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,25 @@ int	final_check(char **map, int height, int length)
 	int	i;
 
 	i = 0;
-	while (height >= 0)
+	while (i < length)
 	{
-		while (++i < length)
-			if (map[height][i] != '1' && map[height][i] != '2')
-				return (1);
-		height--;
-		i = 0;
+		if (map[0][i] != '1')
+			return (1);
+		i++;
+	}
+	i = 0;
+	while (i < length)
+	{
+		if (map[height][i] != '1')
+			return (1);
+		i++;
+	}
+	i = 0;
+	while (i < height)
+	{
+		if (map[i][0] != '1' || map[i][length - 1] != '1')
+			return (1);
+		i++;
 	}
 	return (0);
 }
