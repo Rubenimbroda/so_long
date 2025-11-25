@@ -6,7 +6,7 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 03:12:02 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 18:45:26 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 19:22:46 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,14 @@ void load_image(t_all *data, int i, char *path)
 	
 	w = 128;
 	h = 128;
-	ft_printf("Load image entered %i\n", i);
-    //data->imgs[i].img_ptr = mlx_xpm_file_to_image(data->win.mlx, path, &w, &h);
-	ft_printf("Image pointer %p\n", mlx_xpm_file_to_image(data->win.mlx, path, &w, &h));
-	ft_printf("Image Loaded");
-	ft_printf("Load image exit\n");
+    data->imgs[i].img_ptr = mlx_xpm_file_to_image(data->win.mlx, path, &w, &h);
     if (!data->imgs[i].img_ptr)
     {
         free_loaded_images(data, i);
         ft_printf("Error\nInvalid texture file: ");
         write(2, path, ft_strlen(path));
-        ft_printf("\n");
         exit(1);
     }
-	ft_printf("Load image exit\n");
     data->imgs[i].w = w;
     data->imgs[i].h = h;
 }
@@ -40,12 +34,11 @@ void load_image(t_all *data, int i, char *path)
 
 void	alocate_images(t_all *data)
 {
-	ft_printf("Alocate image working\n");
-	load_image(data, 0, "../../textures/floor.xpm");
-	load_image(data, 1, "../../textures/wall.xpm");
-	load_image(data, 2, "../../textures/player.xpm");
-	load_image(data, 3, "../../textures/collectable.xpm");
-	load_image(data, 4, "../../textures/exit.xpm");
+	load_image(data, 0, "textures/floor.xpm");
+	load_image(data, 1, "textures/wall.xpm");
+	load_image(data, 2, "textures/player.xpm");
+	load_image(data, 3, "textures/collectable.xpm");
+	load_image(data, 4, "textures/exit.xpm");
 }
 
 void	clean_images(t_all *data)

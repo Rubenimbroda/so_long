@@ -6,7 +6,7 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 00:43:17 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 17:21:40 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 20:14:49 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	check_many_cep(char **map, int height)
 			j++;
 		}
 	}
-	ft_printf("C:%d\nE:%d\nP:%d\n", many_c, many_e, many_p);
 	if (many_c == 0 || many_p != 1 || many_e != 1)
 		return (1);
 	return (0);
@@ -143,6 +142,5 @@ int	map_check_full(char *filename, t_all *data)
 	flood_fill(dup_map, data->player.x, data->player.y, data->map.h, data->map.w);
 	if (validate_flood(dup_map, data->map.h, data->map.w) == 0)
 		return (free_error_int(dup_map, 4, data->map.h));
-	free_error_int(dup_map, 0, data->map.h);
-	return (0);
+	return (free_error_int(dup_map, 0, data->map.h));
 }

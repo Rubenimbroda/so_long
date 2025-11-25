@@ -6,7 +6,7 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 02:27:15 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 16:58:10 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 20:20:04 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	can_fill(char c)
 {
-	return (c == '0' || c == 'C' || c == 'E');
+	return (c == '0' || c == 'C' || c == 'E' || c == 'P');
 }
 
 void	flood_fill(char **map, int x, int y, int h, int w)
@@ -77,11 +77,10 @@ int	validate_flood(char **map, int h, int w)
 	x = 0;
 	while (y < h)
 	{
+		x = 0;
 		while (x < w)
 		{
-			if (map[y][x] == 'C')
-				return (0);
-			if (map[y][x] == 'E')
+			if (map[y][x] == 'C' || map[y][x] == 'E')
 				return (0);
 			x++;
 		}

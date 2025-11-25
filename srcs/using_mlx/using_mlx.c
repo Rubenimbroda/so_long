@@ -6,7 +6,7 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 17:55:31 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 18:33:45 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 19:06:40 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_window(t_all *data, int win_w, int win_h)
 	if (!data->win.mlx)
 		return ;
 	data->win.win = mlx_new_window(data->win.mlx, win_w, win_h, "So_long");
-	if (data->win.win)
+	if (!data->win.win)
 	{
 		mlx_destroy_display(data->win.mlx);
 		free(data->win.mlx);
@@ -57,6 +57,8 @@ void	handle_events(t_all *data)
 	win_w = (data->map.w - 1) * 128;
 	win_h = data->map.h * 128;
 	ft_printf("Working 1");
+	init_window(data, win_w, win_h);
+	check_screen_size(data, win_w, win_h);
 	alocate_images(data);
 	ft_printf("Working 2");
 	images_to_window(data);
