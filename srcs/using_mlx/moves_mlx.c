@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 03:01:30 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/21 22:56:31 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:07:31 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	movements(int keycode, t_all *data)
 		data->player.moves += move_down(data);
 	else if (keycode == XK_d || keycode == XK_Right)
 		data->player.moves += move_right(data);
-	images_to_window(data, -1);
+	images_to_window(data);
 	ft_printf("Moves: %d\n", data->player.moves);
 	return (0);
 }

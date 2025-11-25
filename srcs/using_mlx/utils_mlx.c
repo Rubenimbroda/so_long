@@ -3,27 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   utils_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 03:128:21 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/21 22:56:39 by rubenior         ###   ########.fr       */
+/*   Created: 2025/11/21 03:12:02 by rubenior          #+#    #+#             */
+/*   Updated: 2025/11/25 18:45:26 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+void load_image(t_all *data, int i, char *path)
+{
+    int w;
+    int h;
+	
+	w = 128;
+	h = 128;
+	ft_printf("Load image entered %i\n", i);
+    //data->imgs[i].img_ptr = mlx_xpm_file_to_image(data->win.mlx, path, &w, &h);
+	ft_printf("Image pointer %p\n", mlx_xpm_file_to_image(data->win.mlx, path, &w, &h));
+	ft_printf("Image Loaded");
+	ft_printf("Load image exit\n");
+    if (!data->imgs[i].img_ptr)
+    {
+        free_loaded_images(data, i);
+        ft_printf("Error\nInvalid texture file: ");
+        write(2, path, ft_strlen(path));
+        ft_printf("\n");
+        exit(1);
+    }
+	ft_printf("Load image exit\n");
+    data->imgs[i].w = w;
+    data->imgs[i].h = h;
+}
+
+
 void	alocate_images(t_all *data)
 {
-	data->imgs[0].img_ptr = mlx_xpm_file_to_image(data->win.mlx,
-			"textures/floor.xpm", &data->imgs[0].w, &data->imgs[0].h);
-	data->imgs[1].img_ptr = mlx_xpm_file_to_image(data->win.mlx,
-			"textures/wall.xpm", &data->imgs[1].w, &data->imgs[1].h);
-	data->imgs[2].img_ptr = mlx_xpm_file_to_image(data->win.mlx,
-			"textures/exit.xpm", &data->imgs[2].w, &data->imgs[2].h);
-	data->imgs[3].img_ptr = mlx_xpm_file_to_image(data->win.mlx,
-			"textures/player.xpm", &data->imgs[3].w, &data->imgs[3].h);
-	data->imgs[4].img_ptr = mlx_xpm_file_to_image(data->win.mlx,
-			"textures/collectable.xpm", &data->imgs[4].w, &data->imgs[4].h);
+	ft_printf("Alocate image working\n");
+	load_image(data, 0, "../../textures/floor.xpm");
+	load_image(data, 1, "../../textures/wall.xpm");
+	load_image(data, 2, "../../textures/player.xpm");
+	load_image(data, 3, "../../textures/collectable.xpm");
+	load_image(data, 4, "../../textures/exit.xpm");
 }
 
 void	clean_images(t_all *data)
@@ -48,30 +70,14 @@ int	close_n_clean(t_all *data)
 	exit (EXIT_SUCCESS);
 }
 
-void	images_to_window(t_all *data, int i)
+void images_to_window(t_all *data)
 {
-	int	j;
+    int i = 0;
 
-	while (++i < data->map.h)
-	{
-		j = -1;
-		while (++j < (data->map.w - 1))
-		{
-			if (data->map.map[i][j] == '0')
-				mlx_put_image_to_window(data->win.mlx, data->win.win,
-					data->imgs[0].img_ptr, (j * 128), (i * 128));
-			else if (data->map.map[i][j] == '1')
-				mlx_put_image_to_window(data->win.mlx, data->win.win,
-					data->imgs[1].img_ptr, (j * 128), (i * 128));
-			else if (data->map.map[i][j] == 'E')
-				mlx_put_image_to_window(data->win.mlx, data->win.win,
-					data->imgs[2].img_ptr, (j * 128), (i * 128));
-			else if (data->map.map[i][j] == 'P')
-				mlx_put_image_to_window(data->win.mlx, data->win.win,
-					data->imgs[3].img_ptr, (j * 128), (i * 128));
-			else if (data->map.map[i][j] == 'C')
-				mlx_put_image_to_window(data->win.mlx, data->win.win,
-					data->imgs[4].img_ptr, (j * 128), (i * 128));
-		}
-	}
+    while (i < data->map.h)
+    {
+        draw_column(data, i);
+        i++;
+    }
 }
+

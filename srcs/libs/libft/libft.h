@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 14:37:23 by rnuno-im          #+#    #+#             */
-/*   Updated: 2025/11/21 20:21:21 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:37:55 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
-    
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif

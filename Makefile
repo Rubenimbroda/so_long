@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+         #
+#    By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/13 12:19:11 by rnuno-im          #+#    #+#              #
-#    Updated: 2025/11/21 23:28:35 by rubenior         ###   ########.fr        #
+#    Updated: 2025/11/25 18:20:39 by rnuno-im         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= 	so_long
 
 CC			=	cc
-CFLAGS		= 	-Werror -Wextra -Wall -g
+CFLAGS		= 	-Werror -Wextra -Wall
 
 # Directorios
 PATH_MLX 	= 	srcs/using_mlx/
@@ -22,7 +22,7 @@ MLX_PATH	=	minilibx-linux
 
 # Archivos fuente
 MAP_SRCS 	=	map_utils.c map_possible.c map_check_full.c
-MLX_SRCS 	=	utils_mlx.c moves_mlx.c using_mlx.c
+MLX_SRCS 	=	utils_mlx.c moves_mlx.c using_mlx.c draw_map.c
 
 SRCS = $(addprefix $(PATH_MAP), $(MAP_SRCS)) $(addprefix $(PATH_MLX), $(MLX_SRCS)) srcs/main.c
 

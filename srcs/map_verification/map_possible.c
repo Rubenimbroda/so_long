@@ -6,77 +6,38 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 02:27:15 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 11:53:26 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:58:10 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	search_to_change(char c)
+int	can_fill(char c)
 {
-	char	*str;
-	int		i;
-
-	i = 0;
-	str = "0CE";
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (0);
-		i++;
-	}
-	return (1);
+	return (c == '0' || c == 'C' || c == 'E');
 }
 
-int	check_close_places(char **map, int l_p, int h_p)
+void	flood_fill(char **map, int x, int y, int h, int w)
 {
-	int	changes;
-
-	changes = 0;
-	if (search_to_change(map[h_p][l_p + 1]) == 0)
-	{
-		map[h_p][l_p + 1] = '2';
-		changes++;
-	}
-	if (search_to_change(map[h_p][l_p - 1]) == 0)
-	{
-		map[h_p][l_p - 1] = '2';
-		changes++;
-	}
-	if (search_to_change(map[h_p + 1][l_p]) == 0)
-	{
-		map[h_p + 1][l_p] = '2';
-		changes++;
-	}
-	if (search_to_change(map[h_p - 1][l_p]) == 0)
-	{
-		map[h_p - 1][l_p] = '2';
-		changes++;
-	}
-	return (changes);
+	if (x < 0 || y < 0 || x >= w || y >= h)
+		return ;
+	if (!can_fill(map[y][x]))
+		return ;
+	map[y][x] = '2';
+	flood_fill(map, x + 1, y, h, w);
+	flood_fill(map, x - 1, y, h, w);
+	flood_fill(map, x, y + 1, h, w);
+	flood_fill(map, x, y - 1, h, w);
 }
 
-int	scanning(char **map, t_all *data)
+void	check_path(t_all *data)
 {
-	int	changes;
-	int	i;
-	int	j;
+	int	px;
+	int	py;
 
-	i = 1;
-	j = 1;
-	changes = 0;
-	while (i < data->map.h)
-	{
-		while (j < data->map.w)
-		{
-			if (map[i][j] == '2')
-				changes += check_close_places(map, j, i);
-			j++;
-		}
-		j = 1;
-		i++;
-	}
-	return (changes);
+	px = data->player.x;
+	py = data->player.y;
+	flood_fill(data->map.map, px, py, data->map.h, data->map.w);
 }
 
 int	final_check(char **map, int height, int length)
@@ -107,28 +68,24 @@ int	final_check(char **map, int height, int length)
 	return (0);
 }
 
-int	check_possible(char **map, t_all *data)
+int	validate_flood(char **map, int h, int w)
 {
-	int	changes;
-	int	j;
-	int	i;
+	int	x;
+	int	y;
 
-	i = -1;
-	j = 0;
-	changes = 1;
-	while (map[++i] != 0)
+	y = 0;
+	x = 0;
+	while (y < h)
 	{
-		while (map[i][++j] != 0)
-			if (map[i][j] == 'P')
-				break ;
-		if (map[i][j] == 'P')
-			break ;
-		j = 0;
+		while (x < w)
+		{
+			if (map[y][x] == 'C')
+				return (0);
+			if (map[y][x] == 'E')
+				return (0);
+			x++;
+		}
+		y++;
 	}
-	map[i][j] = '2';
-	while (changes != 0)
-		changes = scanning(map, data);
-	if (final_check(map, (data->map.h - 1), (data->map.w - 1)) == 1)
-		return (1);
-	return (0);
+	return (1);
 }

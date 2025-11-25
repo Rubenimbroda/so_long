@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 03:06:43 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/21 19:17:41 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:03:32 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_win
 {
 	void	*mlx;
 	void	*win;
+	int		size_x;
+	int		size_y;
 }		t_win;
 
 typedef struct s_all

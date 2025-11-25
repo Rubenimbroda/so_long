@@ -6,36 +6,37 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 00:43:17 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 12:32:42 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:21:40 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	check_many_cep(char **map, int height, int length)
+int	check_many_cep(char **map, int height)
 {
 	int	many_c;
 	int	many_e;
 	int	many_p;
 	int	i;
+	int	j;
 
 	i = -1;
+	j = 0;
 	many_c = 0;
 	many_e = 0;
 	many_p = 0;
 	while (++i < height)
 	{
-		while (map[i][length])
+		j = 0;
+		while (map[i][j])
 		{
-			if (map[i][length] == 'C')
-				many_c++;
-			if (map[i][length] == 'E')
-				many_e++;
-			if (map[i][length++] == 'P')
-				many_p++;
+			if (map[i][j] == 'C') many_c++;
+			if (map[i][j] == 'E') many_e++;
+			if (map[i][j] == 'P') many_p++;
+			j++;
 		}
-		length = 0;
 	}
+	ft_printf("C:%d\nE:%d\nP:%d\n", many_c, many_e, many_p);
 	if (many_c == 0 || many_p != 1 || many_e != 1)
 		return (1);
 	return (0);
@@ -60,7 +61,7 @@ int	check_closed(char **map, int height, int length)
 	}
 	i = -1;
 	while (++i < length)
-		if (map[height][i] != '1') 
+		if (map[height][i] != '1')
 			return (1);
 	return (0);
 }
@@ -136,10 +137,11 @@ int	map_check_full(char *filename, t_all *data)
 	data->map.w = ft_strlen(data->map.map[0]);
 	if (check_closed(data->map.map, data->map.h, data->map.w) == 1)
 		return (2);
-	if (check_many_cep(data->map.map, data->map.h, 0) == 1)
+	if (check_many_cep(data->map.map, data->map.h) == 1)
 		return (3);
 	dup_map = dupmap(data);
-	if (check_possible(dup_map, data) == 1)
+	flood_fill(dup_map, data->player.x, data->player.y, data->map.h, data->map.w);
+	if (validate_flood(dup_map, data->map.h, data->map.w) == 0)
 		return (free_error_int(dup_map, 4, data->map.h));
 	free_error_int(dup_map, 0, data->map.h);
 	return (0);

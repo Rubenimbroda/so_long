@@ -6,7 +6,7 @@
 /*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 02:43:38 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/25 12:03:53 by rnuno-im         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:09:48 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_characters(char *str)
 	while (str[i])
 	{
 		if (str[i] != '1' && str[i] != '0' && str[i] != 'P'
-			&& str[i] != 'C' && str[i] != 'E' && str[i] != '\n' && str[i] != '\0')
+			&& str[i] != 'C' && str[i] != 'E' && str[i] != '\n')
 		{
 			return (1);
 		}
@@ -60,12 +60,19 @@ char	**dupmap(t_all *data)
 	char	**duplicated_map;
 	int		i;
 
-	i = -1;
-	duplicated_map = (char **)malloc(sizeof(char *) * data->map.h + 1);
+	i = 0;
+	duplicated_map = (char **)malloc(sizeof(char *) * (data->map.h + 1));
 	if (!duplicated_map)
 		return (free_error_char(duplicated_map));
-	while (++i < data->map.h)
+	while (i < data->map.h)
+	{
 		duplicated_map[i] = ft_strdup(data->map.map[i]);
+		if (!duplicated_map[i])
+		{
+			free_error_char(duplicated_map);
+		}
+		i++;
+	}
 	return (duplicated_map);
 }
 
