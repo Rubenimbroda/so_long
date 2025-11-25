@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_full.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 00:43:17 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/24 15:18:21 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:32:42 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,16 @@ int	get_size(int fd, t_all *data)
 	str = get_next_line(fd);
 	if (str == NULL)
 		return (0);
+	if (str[ft_strlen(str) - 1] == '\n')
+		str[ft_strlen(str) - 1] = '\0';
 	data->map.w = ft_strlen(str);
-	while (str)
+	while (str != NULL)
 	{
+		if (str[ft_strlen(str) - 1] == '\n')
+			str[ft_strlen(str) - 1] = '\0';
 		if (ft_strlen(str) != (size_t)data->map.w
 			|| check_characters(str) == 1)
-		{
-			free (str);
-			return (0);
-		}
+			return (free(str), 0);
 		many_lines++;
 		free(str);
 		str = get_next_line(fd);

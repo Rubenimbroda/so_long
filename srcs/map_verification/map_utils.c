@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 02:43:38 by rubenior          #+#    #+#             */
-/*   Updated: 2025/11/24 13:48:02 by rubenior         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:03:53 by rnuno-im         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_characters(char *str)
 	while (str[i])
 	{
 		if (str[i] != '1' && str[i] != '0' && str[i] != 'P'
-			&& str[i] != 'C' && str[i] != 'E' && str[i] != '\n')
+			&& str[i] != 'C' && str[i] != 'E' && str[i] != '\n' && str[i] != '\0')
 		{
 			return (1);
 		}
