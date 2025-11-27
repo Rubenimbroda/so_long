@@ -3,70 +3,55 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rnuno-im <rnuno-im@student.42.fr>          +#+  +:+       +#+         #
+#    By: rubenior <rubenior@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/13 12:19:11 by rnuno-im          #+#    #+#              #
-#    Updated: 2025/11/25 18:20:39 by rnuno-im         ###   ########.fr        #
+#    Updated: 2025/11/27 12:41:17 by rubenior         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 	so_long
+NAME	= so_long
 
-CC			=	cc
-CFLAGS		= 	-Werror -Wextra -Wall
+SRCS_DIR	= src
+INCLUDE_DIR	= include
+MLX_DIR		= minilibx-linux
+LIBFT_DIR	= libft
 
-# Directorios
-PATH_MLX 	= 	srcs/using_mlx/
-PATH_MAP 	= 	srcs/map_verification/
-MLX_PATH	=	minilibx-linux
+SRCS	= $(SRCS_DIR)/map_parser.c \
+		  $(SRCS_DIR)/render.c \
+		  $(SRCS_DIR)/map_utils.c \
+		  $(SRCS_DIR)/events.c \
+		  $(SRCS_DIR)/validate_map.c \
+		  $(SRCS_DIR)/validate_utils.c \
+		  so_long.c
 
-# Archivos fuente
-MAP_SRCS 	=	map_utils.c map_possible.c map_check_full.c
-MLX_SRCS 	=	utils_mlx.c moves_mlx.c using_mlx.c draw_map.c
+OBJS	= $(SRCS:.c=.o)
 
-SRCS = $(addprefix $(PATH_MAP), $(MAP_SRCS)) $(addprefix $(PATH_MLX), $(MLX_SRCS)) srcs/main.c
+LIBFT	= $(LIBFT_DIR)/libft.a
+MLX		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-# Bibliotecas
-LIBS		=	srcs/libs/libft/libft.a srcs/libs/gnl/gnl.a
-
-# Objetos
-OBJS		= 	$(SRCS:.c=.o)
-
-# MiniLibX
-MLX			=	$(MLX_PATH)/libmlx.a
-MLX_FLAGS	= 	-L$(MLX_PATH) -lmlx -lXext -lX11 -lm
-
-# Includes
-INCLUDES	=	-I includes -I srcs/libs/libft -I srcs/libs/gnl -I $(MLX_PATH)
-
-RM			= 	rm -rf
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 all: $(NAME)
 
-$(NAME): $(MLX) $(OBJS)
-	@make -C srcs/libs/libft
-	@make -C srcs/libs/gnl
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX) -L$(LIBFT_DIR) -lft
 	@echo "✅ Compilation complete: $(NAME)"
 
-$(MLX):
-	@make -C $(MLX_PATH)
-
-%.o: %.c
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+$(LIBFT):
+	make -C $(LIBFT_DIR)
 
 clean:
-	@make clean -C srcs/libs/libft
-	@make clean -C srcs/libs/gnl
-	@make clean -C $(MLX_PATH)
-	$(RM) $(OBJS)
+	rm -f $(OBJS)
+	make -C $(LIBFT_DIR) clean
 	@echo "🧹 Object files cleaned."
 
 fclean: clean
-	@make fclean -C srcs/libs/libft
-	@make fclean -C srcs/libs/gnl
-	$(RM) $(NAME)
-	@echo "🗑️  All cleaned (including binary)."
+	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean
+	@echo "🗑️  All cleaned."
 
 re: fclean all
 
